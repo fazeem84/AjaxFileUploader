@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="jquery-1.11.3.min.js"></script>
+<script>
+	function uploadFile() {
+		$('#result').text("");
+		var documentData = new FormData();
+		var file = $('#file')[0].files[0];
+		documentData.append('file', file);
+		documentData.append('fileName', file.name);
+		$
+				.ajax({
+					url : 'http://localhost:8080/AjaxFileUploader/service/webservice/upload/',
+					type : 'POST',
+					data : documentData,
+					cache : false,
+					contentType : false,
+					processData : false,
+					success : function(response) {
+						//	alert("Document uploaded successfully.");
+						$('#result').text("Document uploaded successfully.");
+					}
+				});
+
+		return false;
+	}
+</script>
+</head>
+<body>
+	<div style="height: 100%; width: 100%;">
+		<div style="float: left">
+			<input id="file" type="file" class="findDocumentOnboarding" /> <input
+				type="button" value="Upload document" onclick='uploadFile();' />
+
+		</div>
+		<div id="result" style="float: left; padding: 10px"></div>
+	</div>
+</body>
+</html>
